@@ -87,6 +87,19 @@ let currentSlide = 0;
 const imageCollage = document.querySelector('.image-collage');
 const storyText = document.querySelector('.story-text');
 const slideElement = document.querySelector('.slide');
+const music = document.getElementById('background-music');
+const playPrompt = document.getElementById('play-prompt');
+const storyContainer = document.querySelector('.story-container');
+
+document.body.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        playPrompt.style.display = 'none';
+        storyContainer.style.display = 'block';
+        showSlide(0);
+        setInterval(nextSlide, 8000); 
+    }
+}, { once: true });
 
 function showSlide(slideIndex) {
     slideElement.classList.remove('active');
@@ -125,9 +138,3 @@ function nextSlide() {
     }
     showSlide(currentSlide);
 }
-
-// Initial load
-showSlide(0);
-
-// Auto-play the slides
-setInterval(nextSlide, 8000);
